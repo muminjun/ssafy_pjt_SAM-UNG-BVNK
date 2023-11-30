@@ -1,0 +1,711 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>url 관리</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="410ef8f7-8fb9-4207-ab59-74a768997e17" class="page sans"><header><h1 class="page-title">url 관리</h1><p class="page-description"></p><table class="properties"><tbody><tr class="property-row property-row-status"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesStatus"><path d="M8.75488 1.02344C8.75488 0.613281 8.41309 0.264648 8.00293 0.264648C7.59277 0.264648 7.25098 0.613281 7.25098 1.02344V3.11523C7.25098 3.51855 7.59277 3.86719 8.00293 3.86719C8.41309 3.86719 8.75488 3.51855 8.75488 3.11523V1.02344ZM3.91504 5.0293C4.20215 5.31641 4.69434 5.32324 4.97461 5.03613C5.26855 4.74902 5.26855 4.25684 4.98145 3.96973L3.53906 2.52051C3.25195 2.2334 2.7666 2.21973 2.47949 2.50684C2.19238 2.79395 2.18555 3.28613 2.47266 3.57324L3.91504 5.0293ZM10.9629 4.01758C10.6826 4.30469 10.6826 4.79688 10.9697 5.08398C11.2568 5.37109 11.749 5.36426 12.0361 5.07715L13.4854 3.62793C13.7725 3.34082 13.7725 2.84863 13.4785 2.55469C13.1982 2.27441 12.7061 2.27441 12.4189 2.56152L10.9629 4.01758ZM15.0234 8.78906C15.4336 8.78906 15.7822 8.44727 15.7822 8.03711C15.7822 7.62695 15.4336 7.28516 15.0234 7.28516H12.9385C12.5283 7.28516 12.1797 7.62695 12.1797 8.03711C12.1797 8.44727 12.5283 8.78906 12.9385 8.78906H15.0234ZM0.975586 7.28516C0.56543 7.28516 0.223633 7.62695 0.223633 8.03711C0.223633 8.44727 0.56543 8.78906 0.975586 8.78906H3.07422C3.48438 8.78906 3.83301 8.44727 3.83301 8.03711C3.83301 7.62695 3.48438 7.28516 3.07422 7.28516H0.975586ZM12.0361 10.9902C11.749 10.71 11.2568 10.71 10.9629 10.9971C10.6826 11.2842 10.6826 11.7764 10.9697 12.0635L12.4258 13.5127C12.7129 13.7998 13.2051 13.793 13.4922 13.5059C13.7793 13.2256 13.7725 12.7266 13.4854 12.4395L12.0361 10.9902ZM2.52051 12.4395C2.22656 12.7266 2.22656 13.2188 2.50684 13.5059C2.79395 13.793 3.28613 13.7998 3.57324 13.5127L5.02246 12.0703C5.31641 11.7832 5.31641 11.291 5.03613 11.0039C4.74902 10.7168 4.25684 10.71 3.96973 10.9971L2.52051 12.4395ZM8.75488 12.9658C8.75488 12.5557 8.41309 12.207 8.00293 12.207C7.59277 12.207 7.25098 12.5557 7.25098 12.9658V15.0576C7.25098 15.4609 7.59277 15.8096 8.00293 15.8096C8.41309 15.8096 8.75488 15.4609 8.75488 15.0576V12.9658Z"></path></svg></span>상태</th><td><span class="status-value"><div class="status-dot"></div>시작 전</span></td></tr><tr class="property-row property-row-last_edited_time"><th><span class="icon property-icon"><svg role="graphics-symbol" viewBox="0 0 16 16" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0" class="typesCreatedAt"><path d="M8 15.126C11.8623 15.126 15.0615 11.9336 15.0615 8.06445C15.0615 4.20215 11.8623 1.00293 7.99316 1.00293C4.13086 1.00293 0.938477 4.20215 0.938477 8.06445C0.938477 11.9336 4.1377 15.126 8 15.126ZM8 13.7383C4.85547 13.7383 2.33301 11.209 2.33301 8.06445C2.33301 4.91992 4.84863 2.39746 7.99316 2.39746C11.1377 2.39746 13.6738 4.91992 13.6738 8.06445C13.6738 11.209 11.1445 13.7383 8 13.7383ZM4.54102 8.91211H7.99316C8.30078 8.91211 8.54004 8.67285 8.54004 8.37207V3.8877C8.54004 3.58691 8.30078 3.34766 7.99316 3.34766C7.69238 3.34766 7.45312 3.58691 7.45312 3.8877V7.83203H4.54102C4.2334 7.83203 4.00098 8.06445 4.00098 8.37207C4.00098 8.67285 4.2334 8.91211 4.54102 8.91211Z"></path></svg></span>최종 편집 일시</th><td><time>@2023년 11월 22일 오전 8:46</time></td></tr></tbody></table></header><div class="page-body"><ul id="59d94ab5-1f81-4f05-8630-568f2db86f04" class="bulleted-list"><li style="list-style-type:disc">민준</li></ul><figure id="b441f236-337d-4265-bfe4-90201cc3b9b5"><div class="source"><a href="url%20%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5%20410ef8f78fb94207ab5974a768997e17/Front_%25EC%25A3%25BC%25EC%2586%258C_%25EC%25A0%2595%25EB%25A6%25AC_%25EB%25AC%25B8%25EC%2584%259C.txt">Front 주소 정리 문서.txt</a></div></figure><p id="98efe7de-a5ef-436e-aa92-d6bc33ba8bda" class="">&lt;Views, Component, stores, router 정리 문서&gt;</p><h1 id="c7f4ef8f-eed1-4fbb-9820-78cfdf409b3b" class="">App.vue</h1><ul id="ac9292b9-0336-4399-8271-ba902262a74c" class="bulleted-list"><li style="list-style-type:disc">네비게이션 바</li></ul><p id="10b39200-42dc-44d7-910c-79b884188641" class="">//</p><h1 id="e681e008-c91b-46d0-b569-16ceb9cdac46" class="">Views</h1><ul id="2ac8c233-ca59-4978-bace-25241b3cb9a4" class="bulleted-list"><li style="list-style-type:disc">Home.vue<ul id="af3d74d4-8707-4900-acee-213b3fce5fde" class="bulleted-list"><li style="list-style-type:circle">메인화면, carousel</li></ul></li></ul><ul id="260026a0-7825-4865-816e-03775302af6f" class="bulleted-list"><li style="list-style-type:disc">SignUp.vue<ul id="979f44ba-585d-41b3-8257-5906fc5b8823" class="bulleted-list"><li style="list-style-type:circle">회원가입 페이지</li></ul></li></ul><ul id="cba3f581-0c39-44a0-a99a-e9d75baafb39" class="bulleted-list"><li style="list-style-type:disc">LogInView.vue<ul id="22a87f91-d2b6-49c6-b8a3-7424f8606589" class="bulleted-list"><li style="list-style-type:circle">로그인 페이지</li></ul></li></ul><ul id="2a84e8a8-5ad2-439f-b3b2-035b6c595639" class="bulleted-list"><li style="list-style-type:disc">MyPage.vue<ul id="7032727b-4d2b-4efe-8bb6-322a2690269c" class="bulleted-list"><li style="list-style-type:circle">마이페이지(내 정보 + 추천알고리즘)</li></ul></li></ul><ul id="32efd94c-c5bc-424f-b333-c161d146e3a2" class="bulleted-list"><li style="list-style-type:disc">Deposit.vue<ul id="3c67a8b3-8be8-4cd2-b882-80bff4e222b2" class="bulleted-list"><li style="list-style-type:circle">예금 상품 리스트</li></ul></li></ul><ul id="0a062ce3-718f-4431-95c4-0593d1826a40" class="bulleted-list"><li style="list-style-type:disc">BankMap.vue<ul id="6236db00-1887-48eb-9ddc-11343e2a47d5" class="bulleted-list"><li style="list-style-type:circle">주변 은행 찾는 지도</li></ul></li></ul><ul id="3545b2d1-cad7-484c-a91b-15bc8f8eac13" class="bulleted-list"><li style="list-style-type:disc">Calculator.vue<ul id="2c1e457c-519e-4ae0-8a2d-6dbe041d311b" class="bulleted-list"><li style="list-style-type:circle">환율계산기, 예금계산기, 적금계산기</li></ul></li></ul><ul id="db0cf443-3c7f-4e38-9dfe-1f8eecbba1de" class="bulleted-list"><li style="list-style-type:disc">Community.vue<ul id="37898141-1ab0-4060-b874-09bef99076e3" class="bulleted-list"><li style="list-style-type:circle">게시판 CRUD</li></ul></li></ul><p id="b59f15f9-48d3-4ee2-bac1-2c43d75cf22f" class="">//</p><h1 id="6ab7aea9-f272-47b8-9223-61956bb79fc2" class="">Component</h1><ul id="4864e91f-6ec7-4d43-a96a-1a6965626b7a" class="bulleted-list"><li style="list-style-type:disc">DepositProductList.vue<ul id="5f1f84d8-61c0-4aba-897c-a94a8cecb0ad" class="bulleted-list"><li style="list-style-type:circle">예금 상품 목록 리스트</li></ul></li></ul><ul id="1c3011d1-5f94-4eba-b1d2-f9c3460c0669" class="bulleted-list"><li style="list-style-type:disc">DepositDetailComp.vue<ul id="842fa12e-caa2-4cda-b544-f316b4da4f04" class="bulleted-list"><li style="list-style-type:circle">특정 예금상품 상세 페이지</li></ul></li></ul><ul id="6903f900-db5f-4f13-86b2-8e9b8d12244f" class="bulleted-list"><li style="list-style-type:disc">SavingList.vue<ul id="1483e9d0-6508-4823-8a76-026c4a36676b" class="bulleted-list"><li style="list-style-type:circle">적금 상품 리스트</li></ul></li></ul><ul id="0f3e442e-cbad-4ab5-bb33-c6977db8ce61" class="bulleted-list"><li style="list-style-type:disc">SavingProductList.vue<ul id="e9917c05-a3cc-4d50-b0b5-dcbc769749b4" class="bulleted-list"><li style="list-style-type:circle">적금 상품 목록 리스트</li></ul></li></ul><ul id="8d0ed479-6358-47e8-aac4-9a199436d112" class="bulleted-list"><li style="list-style-type:disc">SavingDetailComp.vue<ul id="29c8abf6-bbe1-4634-a292-4a12ee30f031" class="bulleted-list"><li style="list-style-type:circle">특정 적금상품 상세 페이지</li></ul></li></ul><ul id="917c5c88-385f-4c3b-ae02-240bafa7d444" class="bulleted-list"><li style="list-style-type:disc">CartProductComp.vue<ul id="f8a08218-2c66-4a76-85a9-1667a4810798" class="bulleted-list"><li style="list-style-type:circle">상품 담기 + 취소</li></ul></li></ul><ul id="3fdd5d33-deda-403b-a006-eb312fe38dc8" class="bulleted-list"><li style="list-style-type:disc">CalculComp.vue<ul id="7802128d-9dbf-464b-8259-37a904670355" class="bulleted-list"><li style="list-style-type:circle">예금 계산기</li></ul></li></ul><ul id="ba2e8786-6baa-4efd-9620-c231ba6d1c7e" class="bulleted-list"><li style="list-style-type:disc">CalculSavingComp.vue<ul id="b9e5dd8e-b972-489e-80be-6cb93694994f" class="bulleted-list"><li style="list-style-type:circle">적금 계산기</li></ul></li></ul><ul id="ed1134b2-479d-4ec3-b867-2ace0f162a47" class="bulleted-list"><li style="list-style-type:disc">Exchange.vue<ul id="0b8570a7-e56f-460c-84e4-c12713aa85cb" class="bulleted-list"><li style="list-style-type:circle">환율 계산기</li></ul></li></ul><ul id="ee4db3b5-ee35-492e-82dd-fcc5f79b3b1e" class="bulleted-list"><li style="list-style-type:disc">KakaoMap.vue<ul id="718f194f-0ec2-40f7-92cc-93a46224627b" class="bulleted-list"><li style="list-style-type:circle">지도 컴포넌트</li></ul></li></ul><ul id="8530448d-4bce-4c77-ad4c-1f2f64daa0b3" class="bulleted-list"><li style="list-style-type:disc">PostList.vue<ul id="68092755-b6e7-4de6-a673-e1be8f556280" class="bulleted-list"><li style="list-style-type:circle">게시물 전체 리스트</li></ul></li></ul><ul id="34541c3e-8e26-4c77-b597-142130840b4b" class="bulleted-list"><li style="list-style-type:disc">PostDetailComp.vue<ul id="a58e7250-0ce0-47ce-b895-29f7d00d8c9b" class="bulleted-list"><li style="list-style-type:circle">게시물 상세 페이지</li></ul></li></ul><ul id="04125ba2-c028-4c98-ba64-b7ed22a6aba3" class="bulleted-list"><li style="list-style-type:disc">PostCreateComp.vue<ul id="6a23744f-5649-4840-9d4d-c8cb18b1ef66" class="bulleted-list"><li style="list-style-type:circle">게시물 생성 페이지</li></ul></li></ul><ul id="e59977bb-0aa6-4dcb-8e03-21c323c1de2d" class="bulleted-list"><li style="list-style-type:disc">PostUpdateComp.vue<ul id="18b6d0fc-acd0-4a3b-8486-3f0b57f247ee" class="bulleted-list"><li style="list-style-type:circle">게시물 수정 페이지</li></ul></li></ul><p id="2b81888e-09d9-4f55-ba3b-95ea16d5d30c" class="">//</p><h1 id="e9e4b240-b6c7-4eb2-9550-11a703199c79" class="">stores</h1><ul id="a44e8387-4823-43fb-ac3c-afb104f24ef3" class="bulleted-list"><li style="list-style-type:disc">counter.js<ul id="fb8f93f1-811a-4976-91ba-862229b96a59" class="bulleted-list"><li style="list-style-type:circle">signUp()<ul id="8a4d5925-46fa-4726-8f35-f81517913b4c" class="bulleted-list"><li style="list-style-type:square">회원가입 요청</li></ul></li></ul><ul id="f23e40da-01f2-44c1-81f6-2e3797ec3883" class="bulleted-list"><li style="list-style-type:circle">logIn()<ul id="40177314-0508-4d97-8913-d0e540b07089" class="bulleted-list"><li style="list-style-type:square">로그인 요청</li></ul></li></ul><ul id="39854cc1-75b7-4826-9064-34441cb8dc3a" class="bulleted-list"><li style="list-style-type:circle">logOut()<ul id="40918446-439b-4d49-b0c1-3bd2d2d0f5f2" class="bulleted-list"><li style="list-style-type:square">로그아웃 요청</li></ul></li></ul><ul id="0ffe7ec3-63f5-4c15-967c-3878a5e60cc9" class="bulleted-list"><li style="list-style-type:circle">getMyInfo()<ul id="2781aaf7-3335-4bbf-9bf2-0b7f21f5d1ae" class="bulleted-list"><li style="list-style-type:square">내 정보 요청 + userdata</li></ul></li></ul></li></ul><ul id="9f9b97f1-a7cb-4189-88e6-0a09f924cce9" class="bulleted-list"><li style="list-style-type:disc">product.js<ul id="fb87c86e-d392-401e-8f7f-c7f726a9d1d9" class="bulleted-list"><li style="list-style-type:circle">get_deposit_product()<ul id="ef980de2-4860-4db8-bac9-e8a595bc41aa" class="bulleted-list"><li style="list-style-type:square">예금 상품 정보 요청</li></ul></li></ul><ul id="08778ea2-9524-4ceb-8037-780932aff780" class="bulleted-list"><li style="list-style-type:circle">deposit_product_list<ul id="a5fa5af5-ed6e-4668-92e1-3de9f6b00dfe" class="bulleted-list"><li style="list-style-type:square">예금 상품 리스트</li></ul></li></ul><ul id="c588c215-7b2f-4ebc-8396-d43a2e538d12" class="bulleted-list"><li style="list-style-type:circle">get_saving_product()<ul id="70b64b47-f55e-48af-9998-51cd532bcce7" class="bulleted-list"><li style="list-style-type:square">적금 상품 정보 요청</li></ul></li></ul><ul id="48776e31-c2d0-4331-ab08-cecc80982566" class="bulleted-list"><li style="list-style-type:circle">saving_product_list<ul id="be5a8e25-2234-4545-9199-1842825f19bd" class="bulleted-list"><li style="list-style-type:square">적금 상품 리스트</li></ul></li></ul></li></ul><ul id="33ac8030-d2cd-42d9-b0d1-843b3bc08824" class="bulleted-list"><li style="list-style-type:disc">poster.js<ul id="9d4d1f03-c31b-4fd9-8457-39ac706f6934" class="bulleted-list"><li style="list-style-type:circle">getPosts()<ul id="bc9d242c-fd4d-4d6a-87d0-b7a762b6d990" class="bulleted-list"><li style="list-style-type:square">게시물 정보 요청</li></ul></li></ul></li></ul><ul id="5bb9ef1f-80a3-4e8b-8761-efd3b26a5e5e" class="bulleted-list"><li style="list-style-type:disc">exchange.js<ul id="65f21187-bd14-46ee-ae3f-0939acc89744" class="bulleted-list"><li style="list-style-type:circle">getExchange()<ul id="32fe586c-a4f6-4e48-a169-c18c2125d147" class="bulleted-list"><li style="list-style-type:square">환율 정보 요청</li></ul></li></ul><ul id="16a61bc6-9621-48a2-956b-1c028c04ecc0" class="bulleted-list"><li style="list-style-type:circle">exchangeList<ul id="9f1f200f-3864-43b1-88b6-35f293bc8e5e" class="bulleted-list"><li style="list-style-type:square">환율 정보 리스트</li></ul></li></ul></li></ul><p id="c974b8dd-9a17-447f-a5cc-776cb2da7ad5" class="">
+</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"><hr/><details open="" style="padding-top:1em"><summary style="font-weight:600;font-size:1.25em;line-height:1.3;margin:0">페이지 댓글</summary><div class="indented"><div><ul class="toggle"><li><div><span class="user" style="padding:0.2em"><span class="icon text-icon user-icon"><span class="user-icon-inner">김</span></span><span><b>김혁일</b> <time style="font-size:0.8em">Nov 21, 2023, 8:57 AM</time></span></span></div><div style="padding:0.3em"><a href="url%20%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5%20410ef8f78fb94207ab5974a768997e17/urls.txt" class="url-value">urls.txt</a></div></li><li><div><span class="user" style="padding:0.2em"><span class="icon text-icon user-icon"><span class="user-icon-inner">김</span></span><span><b>김혁일</b> <time style="font-size:0.8em">Nov 23, 2023, 9:12 AM</time></span></span></div><div style="padding:0.2em"># user
+## 회원가입
+<a href="http://127.0.0.1:8000/dj-rest-auth/registration/">http://127.0.0.1:8000/dj-rest-auth/registration/</a>
+## 로그인
+<a href="http://127.0.0.1:8000/dj-rest-auth/login/">http://127.0.0.1:8000/dj-rest-auth/login/</a>
+## 유저 정보 보기, 수정,(&#x27;GET&#x27;,&#x27;PUT&#x27;)
+<a href="http://127.0.0.1:8000/accounts/">http://127.0.0.1:8000/accounts/</a>int:user_pk/
+## 상품 추천(&#x27;GET&#x27;)
+<a href="http://127.0.0.1:8000/financial/recommended-products/">http://127.0.0.1:8000/financial/recommended-products/</a>
+# 게시물
+## 전체 게시물 보기, 게시물 생성(GET,POST)
+<a href="http://127.0.0.1:8000/financial/posts/">http://127.0.0.1:8000/financial/posts/</a>
+## 게시물 디테일 보기, 게시물 삭제, 수정(GET,DELETE,PUT)
+<a href="http://127.0.0.1:8000/financial/posts/">http://127.0.0.1:8000/financial/posts/</a>int:post_pk/
+## 게시물에 댓글 달기(POST)
+<a href="http://127.0.0.1:8000/financial/posts/">http://127.0.0.1:8000/financial/posts/</a>int:post_pk/comments/
+## 게시물 댓글 삭제(DELETE)
+<a href="http://127.0.0.1:8000/financial/posts/">http://127.0.0.1:8000/financial/posts/</a>int:post_pk/comments/int:comment_pk/
+## 게시물 좋아요 토글(POST)
+<a href="http://127.0.0.1:8000/financial/posts/">http://127.0.0.1:8000/financial/posts/</a>int:post_pk/likes/
+## 게시물 싫어요 토글(POST)
+<a href="http://127.0.0.1:8000/financial/posts/">http://127.0.0.1:8000/financial/posts/</a>int:post_pk/hates/
+# 예적금
+## 예적금 정보 db에 저장 (다시 사용안함 fixtures에 저장 해둠)(GET)
+<a href="http://127.0.0.1:8000/financial/save-products/">http://127.0.0.1:8000/financial/save-products/</a>
+## 전체 예금 상품보기(GET)
+<a href="http://127.0.0.1:8000/financial/deposit-product-list/">http://127.0.0.1:8000/financial/deposit-product-list/</a>
+## 전체 적금 상품보기(GET)
+<a href="http://127.0.0.1:8000/financial/saving-product-list/">http://127.0.0.1:8000/financial/saving-product-list/</a>
+## 예금 디테일 보기, 관리자만 수정 email로 전달, 상품가입(GET,PUT,POST)
+<a href="http://127.0.0.1:8000/financial/deposit-product-detail/">http://127.0.0.1:8000/financial/deposit-product-detail/</a>int:deposit_product_pk/
+## 적금 디테일 보기, 관리자만 수정 email로 전달, 상품가입(GET,PUT,POST)
+<a href="http://127.0.0.1:8000/financial/saving-product-detail/">http://127.0.0.1:8000/financial/saving-product-detail/</a>int:saving_product_pk/
+# 환전(GET)
+<a href="http://127.0.0.1:8000/financial/exchange/">http://127.0.0.1:8000/financial/exchange/</a></div><div style="padding:0.3em"></div></li></ul></div><hr/></div></details></span></body></html>

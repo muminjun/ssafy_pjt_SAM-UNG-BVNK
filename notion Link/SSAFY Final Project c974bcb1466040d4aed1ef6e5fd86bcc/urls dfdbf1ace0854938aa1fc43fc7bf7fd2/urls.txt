@@ -1,0 +1,38 @@
+# user 
+## 회원가입
+http://127.0.0.1:8000/dj-rest-auth/registration/
+## 로그인
+http://127.0.0.1:8000/dj-rest-auth/login/
+## 유저 정보 보기, 수정,('GET','PUT')
+http://127.0.0.1:8000/accounts/<int:user_pk>/
+## 상품 추천('GET')
+http://127.0.0.1:8000/financial/recommended-products/
+
+# 게시물
+## 전체 게시물 보기, 게시물 생성(GET,POST)
+http://127.0.0.1:8000/financial/posts/
+## 게시물 디테일 보기, 게시물 삭제, 수정(GET,DELETE,PUT)
+http://127.0.0.1:8000/financial/posts/<int:post_pk>/
+## 게시물에 댓글 달기(POST)
+http://127.0.0.1:8000/financial/posts/<int:post_pk>/comments/
+## 게시물 댓글 삭제(DELETE)
+http://127.0.0.1:8000/financial/posts/<int:post_pk>/comments/<int:comment_pk>/
+## 게시물 좋아요 토글(POST)
+http://127.0.0.1:8000/financial/posts/<int:post_pk>/likes/
+## 게시물 싫어요 토글(POST)
+http://127.0.0.1:8000/financial/posts/<int:post_pk>/hates/
+
+# 예적금
+## 예적금 정보 db에 저장 (다시 사용안함 fixtures에 저장 해둠)(GET)
+http://127.0.0.1:8000/financial/save-products/
+## 전체 예금 상품보기(GET)
+http://127.0.0.1:8000/financial/deposit-product-list/
+## 전체 적금 상품보기(GET)
+http://127.0.0.1:8000/financial/saving-product-list/
+## 예금 디테일 보기, 관리자만 수정 email로 전달, 상품가입(GET,PUT,POST)
+http://127.0.0.1:8000/financial/deposit-product-detail/<int:deposit_product_pk>/
+## 적금 디테일 보기, 관리자만 수정 email로 전달, 상품가입(GET,PUT,POST)
+http://127.0.0.1:8000/financial/saving-product-detail/<int:saving_product_pk>/
+
+# 환전(GET)
+http://127.0.0.1:8000/financial/exchange/

@@ -1,0 +1,89 @@
+<Views, Component, stores, router 정리 문서>
+
+# App.vue
+	- 네비게이션바
+
+//
+# Views
+- Home.vue
+	- 메인화면, carousel
+- SignUp.vue
+	- 회원가입 페이지
+- LogInView.vue
+	- 로그인 페이지
+- MyPage.vue
+	- 마이페이지(내 정보 + 추천알고리즘)
+- Deposit.vue
+	- 예금 상품 리스트
+- BankMap.vue
+	- 주변 은행 찾는 지도
+- Calculator.vue
+	- 환율계산기, 예금계산기, 적금계산기
+- Community.vue
+	- 게시판 CRUD
+
+//
+# Component
+- DepositProductList.vue
+	- 예금 상품 목록 리스트
+- DepositDetailComp.vue
+	- 특정 예금상품 상세 페이지
+
+- SavingList.vue
+	- 적금 상품 리스트
+- SavingProductList.vue
+	- 적금 상품 목록 리스트
+- SavingDetailComp.vue
+	- 특정 적금상품 상세 페이지
+
+- CalculComp.vue
+	- 예금 계산기 
+- CalculSavingComp.vue
+	- 적금 계산기
+- Exchange.vue
+	- 환율 계산기
+
+- KakaoMap.vue
+	- 지도 컴포넌트
+
+- PostList.vue
+	- 게시물 전체 리스트
+- PostDetailComp.vue
+	- 게시물 상세 페이지
+- PostCreateComp.vue
+	- 게시물 생성 페이지
+- PostUpdateComp.vue
+	- 게시물 수정 페이지
+
+//
+# stores
+- counter.js
+	- signUp()
+		- 회원가입 요청
+	- logIn()
+		- 로그인 요청
+	- logOut()
+		- 로그아웃 요청
+	- getMyInfo()
+		- 내 정보 요청 + userdata
+
+- product.js
+	- get_deposit_product()
+		- 예금 상품 정보 요청
+	- deposit_product_list
+		- 예금 상품 리스트
+
+	- get_saving_product()
+		- 적금 상품 정보 요청
+	- saving_product_list
+		- 적금 상품 리스트
+
+- poster.js
+	- getPosts()
+		- 게시물 정보 요청
+
+- exchange.js
+	- getExchange()
+		- 환율 정보 요청
+	- exchangeList
+		- 환율 정보 리스트
