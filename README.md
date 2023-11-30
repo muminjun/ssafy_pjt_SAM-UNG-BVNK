@@ -17,12 +17,12 @@
 - OpenAPI를 이용한 챗봇 시스템
 
 ### ERD
-![ERD](img\ERD.png)
+![ERD](img/ERD.png)
 
 ### 팀원과의 소통
 - 노션을 이용한 일정공유 및 정리
 notion Link\SSAFY Final Project.html
-![notion](img\노션.png)
+![notion](img/노션.png)
 
 ### 구현
 - 메인페이지
@@ -32,30 +32,30 @@ notion Link\SSAFY Final Project.html
 - 금융상품 페이지
   - 금리 순으로 정렬 가능
   - 특정 은행만 필터링하여 검색가능
-  ![List](img\List.png)
+  ![List](img/List.png)
   - 금융상품 상세페이지
     - 해당 상품 가입 시 저축금액을 보다 쉽게 예측 할 수 있도록 그 페이지에서 바로 이자계산이 가능한 기능 구현
-      ![superuser](img\superuser.JPG)
+      ![superuser](img/superuser.JPG)
     - 금융상품 담기 + SuperUser일땐 금리 변경가능 + 변경 시 가입된 사용자들에게 변경 내용 메일 발송
       ![superchange](img/superChange.JPG)
 
 - 근처 은행 검색
   - 원하는 지역을 선택하면, 지도에서 해당 지역의 주변 은행들을 확인이 가능하며, 사이드바에 검색된 은행들의 추가정보 확인 가능
-  ![superuser](img\map.png)
+  ![superuser](img/map.png)
 
 - 환율 계산기
   - 실시간 환율 정보를 이용해 한국 통화가 얼마의 가치를 가지는 지 환율 확인 가능
-    ![superuser](img\exchange.JPG)
+    ![superuser](img/exchange.JPG)
 
 
 - 마이페이지
   - 사용자의 가입 정보 확인 및 수정가능
   - 사용자가 가입한 상품들의 금리를 그래프로 비교가능
     - 예/적금 상품의 금리 개월 수로 각각 비교가능
-    ![superuser](img\chart.png)
+    ![superuser](img/chart.png)
   - 상품 추천 알고리즘
     - 해당 사용자의 성향을 분석하지 않아도 패턴이 비슷한 다른 사용자가 있다면 그 사용자가 가입한 상품들을 추천해주는 알고리즘
-    ![superuser](img\propose.JPG)
+    ![superuser](img/propose.JPG)
 
 - 챗 봇
   - 금융상품 서비스가 처음인 사용자들을 위해 챗봇 기능 구현
